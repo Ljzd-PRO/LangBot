@@ -6,6 +6,11 @@ langbot.log
 /banlist.py
 /plugins/
 !/plugins/__init__.py
+!/plugins/chat_logger.py
+!/plugins/chat_logger.yaml
+!/plugins/README_chat_logger.md
+!/plugins/chat_logger_config_example.yaml
+!/plugins/IMPLEMENTATION_SUMMARY.md
 /revcfg.py
 prompts/
 logs/

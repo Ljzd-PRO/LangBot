@@ -1,0 +1,82 @@
+# Chat Logger Plugin Configuration Examples
+# Place this configuration in your main config.yaml file under the plugins section
+
+# Example 1: Basic SQLite configuration (default)
+chat-logger:
+  database_url: "sqlite+aiosqlite:///./chat_logs.db"
+  database_name: "langbot_chat"
+  include_bot_messages: true
+  group_whitelist: []  # Empty means log all groups
+  group_blacklist: []  # No groups excluded
+
+# Example 2: PostgreSQL configuration
+# chat-logger:
+#   database_url: "postgresql+asyncpg://username:password@localhost:5432/langbot"
+#   database_name: "langbot_chat_production"
+#   include_bot_messages: true
+#   group_whitelist: []
+#   group_blacklist: []
+
+# Example 3: MySQL configuration
+# chat-logger:
+#   database_url: "mysql+aiomysql://username:password@localhost:3306/langbot"
+#   database_name: "langbot_chat_mysql"
+#   include_bot_messages: true
+#   group_whitelist: []
+#   group_blacklist: []
+
+# Example 4: Selective group logging with whitelist
+# chat-logger:
+#   database_url: "sqlite+aiosqlite:///./chat_logs.db"
+#   database_name: "langbot_chat"
+#   include_bot_messages: true
+#   group_whitelist: ["123456789", "987654321"]  # Only log these groups
+#   group_blacklist: []
+
+# Example 5: Exclude specific groups with blacklist
+# chat-logger:
+#   database_url: "sqlite+aiosqlite:///./chat_logs.db"
+#   database_name: "langbot_chat"
+#   include_bot_messages: true
+#   group_whitelist: []  # Log all groups except those in blacklist
+#   group_blacklist: ["111111111", "222222222"]  # Exclude these groups
+
+# Example 6: Log only user messages (exclude bot responses)
+# chat-logger:
+#   database_url: "sqlite+aiosqlite:///./chat_logs.db"
+#   database_name: "langbot_chat"
+#   include_bot_messages: false  # Only log user messages
+#   group_whitelist: []
+#   group_blacklist: []
+
+# Example 7: Advanced configuration with specific groups and no bot messages
+# chat-logger:
+#   database_url: "sqlite+aiosqlite:///./production_chat_logs.db"
+#   database_name: "langbot_production"
+#   include_bot_messages: false
+#   group_whitelist: ["123456789", "987654321", "555666777"]
+#   group_blacklist: []
+
+# Example 8: Using environment variables (recommended for production)
+# chat-logger:
+#   database_url: "${CHAT_LOGGER_DB_URL:sqlite+aiosqlite:///./chat_logs.db}"
+#   database_name: "${CHAT_LOGGER_DB_NAME:langbot_chat}"
+#   include_bot_messages: true
+#   group_whitelist: []
+#   group_blacklist: []
+
+# Notes:
+# 1. Database URL format:
+#    - SQLite: "sqlite+aiosqlite:///path/to/database.db"
+#    - PostgreSQL: "postgresql+asyncpg://user:password@host:port/database"
+#    - MySQL: "mysql+aiomysql://user:password@host:port/database"
+#
+# 2. Group IDs should be provided as strings in the whitelist/blacklist arrays
+#
+# 3. If both whitelist and blacklist are empty, all groups will be logged
+#
+# 4. Whitelist takes precedence over blacklist (if whitelist is specified,
+#    only those groups will be logged regardless of blacklist)
+#
+# 5. The plugin will automatically create the required database tables
+#    on first run if they don't exist
